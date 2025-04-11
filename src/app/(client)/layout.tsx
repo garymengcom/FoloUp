@@ -1,7 +1,6 @@
 "use client";
 
 import "../globals.css";
-import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/navbar";
 import Providers from "@/components/providers";
@@ -10,8 +9,6 @@ import { Toaster } from "sonner";
 import SideMenu from "@/components/sideMenu";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const metadata = {
   title: "FoloUp",
@@ -49,8 +46,7 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          inter.className,
-          "antialiased overflow-hidden min-h-screen",
+          "font-sans antialiased overflow-hidden min-h-screen",
         )}
       >
         <ClerkProvider
