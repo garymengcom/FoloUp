@@ -21,6 +21,7 @@ import { Interview } from "@/types/interview";
 import { FeedbackData } from "@/types/response";
 import { FeedbackService } from "@/services/feedback.service";
 import { FeedbackForm } from "@/components/call/feedbackForm";
+import { useClerk } from "@clerk/nextjs";
 import {
   TabSwitchWarning,
   useTabSwitchPrevention,
@@ -59,6 +60,7 @@ type transcriptType = {
 };
 
 function Call({ interview }: InterviewProps) {
+  const { user } = useClerk();
   const { createResponse } = useResponses();
   const [lastInterviewerResponse, setLastInterviewerResponse] =
     useState<string>("");
@@ -183,6 +185,13 @@ function Call({ interview }: InterviewProps) {
       webClient.removeAllListeners();
     };
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.emailAddresses[0]?.emailAddress || "");
+      setName(user.firstName || "");
+    }
+  }, [user]);
 
   const onEndCallClick = async () => {
     if (isStarted) {
