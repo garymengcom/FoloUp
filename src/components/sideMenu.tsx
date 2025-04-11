@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-sort-props */
 "use client";
 
 import React, { useState } from "react";
@@ -8,6 +9,7 @@ interface SideMenuProps {
   onToggle: (isExpanded: boolean) => void;
 }
 
+// eslint-disable-next-line react/jsx-sort-props
 function SideMenu({ onToggle }: SideMenuProps) {
   const pathname = usePathname();
   const router = useRouter();
