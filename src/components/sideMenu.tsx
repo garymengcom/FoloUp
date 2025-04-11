@@ -4,13 +4,18 @@ import React, { useState } from "react";
 import { PlayCircleIcon, SpeechIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
-function SideMenu() {
+interface SideMenuProps {
+  onToggle: (isExpanded: boolean) => void;
+}
+
+function SideMenu({ onToggle }: SideMenuProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleMenu = () => {
     setIsExpanded(!isExpanded);
+    onToggle(!isExpanded);
   };
 
   return (

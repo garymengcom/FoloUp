@@ -9,6 +9,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import SideMenu from "@/components/sideMenu";
 import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
   return (
     <html lang="en">
@@ -60,8 +62,8 @@ export default function RootLayout({
               !pathname.includes("/sign-up") && <Navbar />}
             <div className="flex flex-row h-screen">
               {!pathname.includes("/sign-in") &&
-                !pathname.includes("/sign-up") && <SideMenu />}
-              <div className="ml-[200px] pt-[64px] h-full overflow-y-auto flex-grow">
+                !pathname.includes("/sign-up") && <SideMenu onToggle={setIsMenuExpanded} />}
+              <div className={`ml-[${isMenuExpanded ? '200px' : '100px'}] pt-[64px] h-full overflow-y-auto flex-grow`}>
                 {children}
               </div>
             </div>
